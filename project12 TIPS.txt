@@ -1,0 +1,71 @@
+typo:
+Task#2 >>  it says "parse_instruction(), which is located in asm_file.c"; it is meant to be asm_parser.c
+
+..........................................................................................................................................
+Task#1:
+
+- When you type in ./assembler test1.asm in your terminal, your filename should be test1.asm. If you type in ./assembler test1, your program should fail gracefully for having entered
+ a wrong/nonexistent filename. If you use the -c flag (like how you create asm_parser.o in your Makefile), it tells the compiler to create a “partially compiled” object file
+and produces a file called filename.o where filename is the name of the target file. The partially compiled object file isn’t an executable program because it’s missing a main() function.
+You don’t need to create an assembler.o here by doing clang -c assembler.c because assembler has a main function.
+Makefile:make sure to add the all, clean, and clobber directives.
+
+- If fgets() returns a NULL pointer, it could mean that there was an error or that it has reached the EOF and no characters have been read. 
+For this task, this information should be enough to determine whether a string was successfully read from a file (if the file string was successfully read, there would be no NULL pointer).
+
+- You can return a non-zero number corresponding to the error number when you encounter an error in your program, and return 0 if the program ran successfully.
+Print the error message on to the terminal console before exiting the program.
+
+- You can assume that the user gives just one argument and that argument is the filename. However your program should be able to handle the case by printing an error message and exiting from
+the program when the user doesn’t provide a filename or if the filename provided can’t be opened. Feel free to use stderr.
+
+- For the 2D array: Row #7 with the '\0' (NULL) was added there to show you what the array should look like for any rows that are empty/not filled. 
+Make sure the contents of your 2D array program[][] has ‘\0’ in the empty rows, you should initialize the array to ‘\0’ prior to filling them in.
+
+.............................................................................................................................................
+Task#2:
+
+- Our program should be able to process instructions from ASM as a case sensitive, all uppercase
+
+- The purpose of this function is to take in a single row of your program[][] array and convert to its binary equivalent – in text form.
+You should be converting it row by row, so you would need to call your parse_instruction function multiple times in assembler.c
+
+..............................................................................................................................................
+Task#3:
+
+- parse_add()
+you need to implement the parse only the ADD instructions - all the arithmetic instructions AND the logical instructions except immediates IMM; 
+the instructions are set up to walk you through only the ADD instruction first.  You should see some more function declarations provided for you in the files.
+
+- Your parsing functions will be working on the strings you read into your program[][] array.  We won't be calling your functions from another program, 
+so only you as the programmer will be controlling that input array.  Moreover, you can assume we will pass in files containing only valid instructions without typos, 
+so all instructions will have the appropriate number of registers. 
+
+......................................................................................................................................................
+Task#4:
+
+- program_bin[] should be an array of integers. For example, the ADD instruction as a binary string in program_bin_str[][] should be "0001001000000001".
+After calling str_to_bin(), program_bin[] should hold the decimal value of that string, which is 4609.
+Let’s say this return value from str_to_bin() when the input binary string was "0001001000000001" is called returnValue.
+
+When you do printf("%x\n”, returnValue) to print the decimal in hex, you will get the hex value 1201. If you do printf("%u\n", returnValue); you should see 4609.
+
+........................................................................................................................................................
+Task#5: (View word document helper, to learn about endianness)
+
+- I would recommend:
+1. using DECA instead of CADE to handle endianness
+2. converting it to a decimal value from hex to store in your unsigned int
+At a high level, you should write the following to the file:
+
+The header
+The number of instructions in the section (you can loop through and count them first)
+Each instruction can be written one at a time in a loop
+
+- You can change the endianness of the numbers in the write_obj_file() function
+Or I recommend using shifting to change the endianness of numeric values
+
+
+
+
+
